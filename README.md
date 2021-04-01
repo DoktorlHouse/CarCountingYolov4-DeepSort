@@ -1,45 +1,21 @@
 # yolov4-deepsort
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1zmeSTP3J5zu2d5fHgsQC06DyYEYJFXq1?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15bxCr2UsHfIB4nnuToQiaiViS8gVlbzN?usp=sharing)
 
-Object tracking implemented with YOLOv4, DeepSort, and TensorFlow. YOLOv4 is a state of the art algorithm that uses deep convolutional neural networks to perform object detections. We can take the output of YOLOv4 feed these object detections into Deep SORT (Simple Online and Realtime Tracking with a Deep Association Metric) in order to create a highly accurate object tracker.
-
-## Demo of Object Tracker on Persons
-<p align="center"><img src="data/helpers/demo.gif"\></p>
+Object counting implemented with YOLOv4, DeepSort, and TensorFlow. YOLOv4 is a state of the art algorithm that uses deep convolutional neural networks to perform object detections. These detections are used in Deep SORT (Simple Online and Realtime Tracking with a Deep Association Metric) to track the individual objects. This allows us to count the objects crossing a specific line.
 
 ## Demo of Object Tracker on Cars
 <p align="center"><img src="data/helpers/cars.gif"\></p>
 
 ## Getting Started
-To get started, install the proper dependencies either via Anaconda or Pip. I recommend Anaconda route for people using a GPU as it configures CUDA toolkit version for you.
+To get started with this repository and to try this code with your own videos I recommend using this script in Google Colab. Just click on "Open in Colab" a few lines above.
 
-### Conda (Recommended)
 
-```bash
-# Tensorflow CPU
-conda env create -f conda-cpu.yml
-conda activate yolov4-cpu
-
-# Tensorflow GPU
-conda env create -f conda-gpu.yml
-conda activate yolov4-gpu
-```
-
-### Pip
-(TensorFlow 2 packages require a pip version >19.0.)
-```bash
-# TensorFlow CPU
-pip install -r requirements.txt
-
-# TensorFlow GPU
-pip install -r requirements-gpu.txt
-```
-### Nvidia Driver (For GPU, if you are not using Conda Environment and haven't set up CUDA yet)
-Make sure to use CUDA Toolkit version 10.1 as it is the proper version for the TensorFlow version used in this repository.
-https://developer.nvidia.com/cuda-10.1-download-archive-update2
 
 ## Downloading Official YOLOv4 Pre-trained Weights
-Our object tracker uses YOLOv4 to make the object detections, which deep sort then uses to track. There exists an official pre-trained YOLOv4 object detector model that is able to detect 80 classes. For easy demo purposes we will use the pre-trained weights for our tracker.
+Our object tracker uses YOLOv4 to make the object detections, which deep sort then uses to track. 
+Yolov4 is based on the Darknet Framework, for further infos check  https://github.com/AlexeyAB/darknet
+There exists an official pre-trained YOLOv4 object detector model that is able to detect 80 classes. For easy demo purposes we will use the pre-trained weights for our tracker.
 Download pre-trained yolov4.weights file: https://drive.google.com/open?id=1cewMfusmPjYWbrnuJRuKhPMwRe_b9PaT
 
 Copy and paste yolov4.weights from your downloads folder into the 'data' folder of this repository.
@@ -60,7 +36,6 @@ python object_tracker.py --video 0 --output ./outputs/webcam.avi --model yolov4
 ```
 The output flag allows you to save the resulting video of the object tracker running so that you can view it again later. Video will be saved to the path that you set. (outputs folder is where it will be if you run the above command!)
 
-If you want to run yolov3 set the model flag to ``--model yolov3``, upload the yolov3.weights to the 'data' folder and adjust the weights flag in above commands. (see all the available command line flags and descriptions of them in a below section)
 
 ## Running the Tracker with YOLOv4-Tiny
 The following commands will allow you to run yolov4-tiny model. Yolov4-tiny allows you to obtain a higher speed (FPS) for the tracker at a slight cost to accuracy. Make sure that you have downloaded the tiny weights file and added it to the 'data' folder in order for commands to work!
@@ -81,13 +56,10 @@ Example video showing tracking of all coco dataset classes:
 ## Filter Classes that are Tracked by Object Tracker
 By default the code is setup to track all 80 or so classes from the coco dataset, which is what the pre-trained YOLOv4 model is trained on. However, you can easily adjust a few lines of code in order to track any 1 or combination of the 80 classes. It is super easy to filter only the ``person`` class or only the ``car`` class which are most common.
 
-To filter a custom selection of classes all you need to do is comment out line 159 and uncomment out line 162 of [object_tracker.py](https://github.com/theAIGuysCode/yolov4-deepsort/blob/master/object_tracker.py) Within the list ``allowed_classes`` just add whichever classes you want the tracker to track. The classes can be any of the 80 that the model is trained on, see which classes you can track in the file [data/classes/coco.names](https://github.com/theAIGuysCode/yolov4-deepsort/blob/master/data/classes/coco.names)
+To filter a custom selection of classes all you need to do is comment out line 185 and uncomment out line 188 of [object_tracker.py](https://github.com/DoktorlHouse/CarCountingYolov4-DeepSort/blob/main/object_tracker.py) Within the list ``allowed_classes`` just add whichever classes you want the tracker to track. The classes can be any of the 80 that the model is trained on, see which classes you can track in the file [data/classes/coco.names](https://github.com/DoktorlHouse/CarCountingYolov4-DeepSort/blob/main/data/classes/coco.names)
 
 This example would allow the classes for person and car to be tracked.
 <p align="center"><img src="data/helpers/filter_classes.PNG"\></p>
-
-### Demo of Object Tracker set to only track the class 'person'
-<p align="center"><img src="data/helpers/demo.gif"\></p>
 
 ### Demo of Object Tracker set to only track the class 'car'
 <p align="center"><img src="data/helpers/cars.gif"\></p>
@@ -138,6 +110,9 @@ save_model.py:
 
 ### References  
 
-   Huge shoutout goes to hunglc007 and nwojke for creating the backbones of this repository:
+   Huge shoutout goes to hunglc007,theAIGuysCode, nwojke and LeonLok for creating the backbones of this repository:
   * [tensorflow-yolov4-tflite](https://github.com/hunglc007/tensorflow-yolov4-tflite)
   * [Deep SORT Repository](https://github.com/nwojke/deep_sort)
+  * [Yolov4-Deepsort Repository](https://github.com/theAIGuysCode/yolov4-deepsort)
+  * [ObjectCounting Repository](https://github.com/LeonLok/Multi-Camera-Live-Object-Tracking)
+
