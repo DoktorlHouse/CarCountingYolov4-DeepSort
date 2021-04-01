@@ -59,10 +59,7 @@ By default the code is setup to track all 80 or so classes from the coco dataset
 To filter a custom selection of classes all you need to do is comment out line 185 and uncomment out line 188 of [object_tracker.py](https://github.com/DoktorlHouse/CarCountingYolov4-DeepSort/blob/main/object_tracker.py) Within the list ``allowed_classes`` just add whichever classes you want the tracker to track. The classes can be any of the 80 that the model is trained on, see which classes you can track in the file [data/classes/coco.names](https://github.com/DoktorlHouse/CarCountingYolov4-DeepSort/blob/main/data/classes/coco.names)
 
 This example would allow the classes for person and car to be tracked.
-<p align="center"><img src="data/helpers/filter_classes.PNG"\></p>
-
-### Demo of Object Tracker set to only track the class 'car'
-<p align="center"><img src="data/helpers/cars.gif"\></p>
+<p align="center"><img src="data/helpers/allowclasses.PNG"\></p>
 
 ## Command Line Args Reference
 
