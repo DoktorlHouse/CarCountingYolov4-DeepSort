@@ -110,6 +110,15 @@ class Track:
         ret[2:] = ret[:2] + ret[2:]
         return ret
     
+    @staticmethod
+    def tlbr_midpoint(box):
+        '''
+        Finds midpoint of a box in tlbr format.
+        '''
+        minX, minY, maxX, maxY = box
+        midpoint = (int((minX + maxX) / 2), int((minY + maxY) / 2))  # minus y coordinates to get proper xy format
+        return midpoint
+    
     def get_class(self):
         return self.class_name
 
