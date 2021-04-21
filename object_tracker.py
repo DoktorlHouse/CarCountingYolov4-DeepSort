@@ -256,7 +256,7 @@ def main(_argv):
                 class_counter[class_name] += 1
                 total_counter += 1
 
-                # draw red line
+                # draw counting line in red when object is crossing the line right in this frame
                 cv2.line(frame, line[0], line[1], (255, 0, 0), 2)
 
                 already_counted.append(track.track_id)  # Set already counted for ID to true.
@@ -280,14 +280,15 @@ def main(_argv):
 
         # if enable info flag then print details about each track
             if FLAGS.info:
-                print("Tracker ID: {}, Class: {},  BBox Coords (xmin, ymin, xmax, ymax): {}".format(str(track.track_id), class_name, (int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3]))))
+                print("Object ID: {}, Class: {},  BBox Coords (xmin, ymin, xmax, ymax): {}".format(str(track.track_id), class_name, (int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3]))))
 
         if len(memory) > 50:
           del memory[list(memory)[0]]
 
         # Draw total count.
         text = "Total: {} ({} up, {} down)".format(str(total_counter), str(up_count),str(down_count))
-        frame =  ps.putBText(frame,text,text_offset_x=int(0.05 * frame.shape[1]),text_offset_y=int(0.1 * frame.shape[0]),vspace=10,hspace=10, font_scale=1.0,background_RGB=(228,225,222),text_RGB=(255,255,255))
+        frame =  ps.putBText(frame,text,text_offset_x=int(0.025 * frame.shape[1]),text_offset_y=int(0.05 * frame.shape[0]),vspace=10,hspace=10, font_scale=1.0,background_RGB=(228,225,222),text_RGB=(255,255,255))
+        # ps.putBText lets us put the Text on the frame infront of a white rectangle which looks quite nice, as an alternative we could use cv2.putText (simply text on the frame)
         #cv2.putText(frame, "Total: {} ({} up, {} down)".format(str(total_counter), str(up_count),
          #           str(down_count)), (int(0.05 * frame.shape[1]), int(0.1 * frame.shape[0])), cv2.FONT_HERSHEY_TRIPLEX,
           #          1.5e-3 * frame.shape[0], (255, 0, 0), 2)
@@ -300,7 +301,7 @@ def main(_argv):
         for cls in class_counter:
             class_count = class_counter[cls]
             text = str(cls) + " " + str(class_count)
-            frame =  ps.putBText(frame,text,text_offset_x=int(0.05 * frame.shape[1]),text_offset_y=int(y),vspace=10,hspace=10, font_scale=1.0,background_RGB=(228,225,222),text_RGB=(255,255,255))
+            frame =  ps.putBText(frame,text,text_offset_x=int(0.025 * frame.shape[1]),text_offset_y=int(y),vspace=5,hspace=10, font_scale=1.0,background_RGB=(228,225,222),text_RGB=(255,255,255))
     
             #cv2.putText(frame, str(cls) + " " + str(class_count), (int(0.05 * frame.shape[1]), int(y)), cv2.FONT_HERSHEY_TRIPLEX,,
              #           1.5e-3 * frame.shape[0], (0, 255, 255), 2)
