@@ -1,6 +1,8 @@
-# Object Counting with Yolov4 and DeepSort
+# Automated traffic flow quantization with Yolov4 and DeepSort
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15bxCr2UsHfIB4nnuToQiaiViS8gVlbzN?usp=sharing)
+
+This repository uses Machine Learning (Object Detection and Tracking) to count the number of objects passing a specific line. With this it is possible to automatically count cars on a highway or pedestrains in the city. 
 
 Object counting implemented with YOLOv4, DeepSort, and TensorFlow. YOLOv4 is a state of the art algorithm that uses deep convolutional neural networks to perform object detections. These detections are used in Deep SORT (Simple Online and Realtime Tracking with a Deep Association Metric) to track the individual objects. This allows us to count the objects crossing a specific line.
 
