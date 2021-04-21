@@ -14,6 +14,7 @@ from core.yolov4 import filter_boxes
 from tensorflow.python.saved_model import tag_constants
 from core.config import cfg
 from PIL import Image
+import pyshine as ps
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -285,9 +286,11 @@ def main(_argv):
           del memory[list(memory)[0]]
 
         # Draw total count.
-        cv2.putText(frame, "Total: {} ({} up, {} down)".format(str(total_counter), str(up_count),
-                    str(down_count)), (int(0.05 * frame.shape[1]), int(0.1 * frame.shape[0])), cv2.FONT_HERSHEY_SIMPLEX,
-                    1.5e-3 * frame.shape[0], (255, 0, 0), 2)
+        text = "Total: {} ({} up, {} down)".format(str(total_counter), str(up_count),str(down_count))
+        frame =  ps.putBText(frame,text,text_offset_x=int(0.05 * frame.shape[1]),text_offset_y=int(0.1 * frame.shape[0]),vspace=10,hspace=10, font_scale=1.0,background_RGB=(228,225,222),text_RGB=(255,255,255))
+        #cv2.putText(frame, "Total: {} ({} up, {} down)".format(str(total_counter), str(up_count),
+         #           str(down_count)), (int(0.05 * frame.shape[1]), int(0.1 * frame.shape[0])), cv2.FONT_HERSHEY_TRIPLEX,
+          #          1.5e-3 * frame.shape[0], (255, 0, 0), 2)
         #cv2.rectangle(frame,(int(0.05 * frame.shape[1]), int(0.1 * frame.shape[0])),
          #           (2*int(0.05 * frame.shape[1]+20*17+(len(str(total_counter))+len(str(up_count))+len(str(down_count)))*17),
           #          int( (0.1+0.05) * frame.shape[0] ) ), (255, 255, 255), -1)
@@ -296,8 +299,11 @@ def main(_argv):
         y = 0.2 * frame.shape[0]
         for cls in class_counter:
             class_count = class_counter[cls]
-            cv2.putText(frame, str(cls) + " " + str(class_count), (int(0.05 * frame.shape[1]), int(y)), 0,
-                        1.5e-3 * frame.shape[0], (0, 255, 255), 2)
+            text = str(cls) + " " + str(class_count)
+            frame =  ps.putBText(frame,text,text_offset_x=int(0.05 * frame.shape[1]),text_offset_y=int(y),vspace=10,hspace=10, font_scale=1.0,background_RGB=(228,225,222),text_RGB=(255,255,255))
+    
+            #cv2.putText(frame, str(cls) + " " + str(class_count), (int(0.05 * frame.shape[1]), int(y)), cv2.FONT_HERSHEY_TRIPLEX,,
+             #           1.5e-3 * frame.shape[0], (0, 255, 255), 2)
             y += 0.05 * frame.shape[0]
 
         # calculate frames per second of running detections
