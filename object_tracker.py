@@ -227,7 +227,7 @@ def main(_argv):
         tracker.update(detections)
 
         # Draw line
-        line = [(0, int(0.5 * frame.shape[0])), (int(frame.shape[1]), int(0.5 * frame.shape[0]))]
+        line = [(0, int(0.25 * frame.shape[0])), (int(frame.shape[1]), int(0.25 * frame.shape[0]))]
         cv2.line(frame, line[0], line[1], (0, 255, 255), 2)
 
         # update tracks
