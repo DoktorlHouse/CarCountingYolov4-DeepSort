@@ -1,4 +1,4 @@
-# Automated traffic flow quantization with Yolov4 and DeepSort
+# Automated traffic counting with Yolov4 and DeepSort
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15bxCr2UsHfIB4nnuToQiaiViS8gVlbzN?usp=sharing)
 
