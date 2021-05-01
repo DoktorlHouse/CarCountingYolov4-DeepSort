@@ -4,7 +4,7 @@
 
 This repository uses Machine Learning (Object Detection and Tracking) to count the number of objects passing a specific line. With this it is possible to automatically count cars on a highway or pedestrains in the city. 
 
-Object counting implemented with YOLOv4, DeepSort, and TensorFlow. YOLOv4 is a state of the art algorithm that uses deep convolutional neural networks to perform object detections. These detections are used in Deep SORT (Simple Online and Realtime Tracking with a Deep Association Metric) to track the individual objects. This allows us to count the objects crossing a specific line.
+Object counting is implemented with YOLOv4, DeepSort and TensorFlow. YOLOv4 is a state-of-the-art algorithm for object detection that uses deep convolutional neural networks. These detections are used in Deep SORT (Simple Online and Realtime Tracking with a Deep Association Metric) to track the individual objects. This allows us to count the objects crossing a specific line.
 
 ## Demo of Object Tracker on Cars
 <p align="center"><img src="data/helpers/cars.gif"\></p>
@@ -15,7 +15,7 @@ To get started with this repository and to try this code with your own videos I 
 
 
 ## Downloading Official YOLOv4 Pre-trained Weights
-Our object tracker uses YOLOv4 to make the object detections, which deep sort then uses to track. 
+The object tracker uses YOLOv4 to make the object detections, which deep sort then uses to track. 
 Yolov4 is based on the Darknet Framework, for further infos check  https://github.com/AlexeyAB/darknet
 There exists an official pre-trained YOLOv4 object detector model that is able to detect 80 classes. For easy demo purposes we will use the pre-trained weights for our tracker.
 Download pre-trained yolov4.weights file: https://drive.google.com/open?id=1cewMfusmPjYWbrnuJRuKhPMwRe_b9PaT
@@ -50,7 +50,7 @@ python object_tracker.py --weights ./checkpoints/yolov4-tiny-416 --model yolov4 
 ```
 
 ## Resulting Video
-As mentioned above, the resulting video will save to wherever you set the ``--output`` command line flag path to. I always set it to save to the 'outputs' folder. You can also change the type of video saved by adjusting the ``--output_format`` flag, by default it is set to AVI codec which is XVID.
+As mentioned above, the resulting video will be saved to wherever you set the ``--output`` command line flag path to. I set it to save to the 'outputs' folder on default. You can also change the type of video saved by adjusting the ``--output_format`` flag, by default it is set to AVI codec which is XVID.
 
 Example video showing tracking of all coco dataset classes:
 <p align="center"><img src="data/helpers/cars.gif"\></p>
